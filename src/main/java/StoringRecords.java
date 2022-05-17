@@ -28,6 +28,17 @@ public class StoringRecords {
 
         // Write here the code for reading from file
         // and printing the read records
+        File f = new File(file);
+        try (BufferedReader br = new BufferedReader(new FileReader(f))){
+            for (String line = br.readLine(); line != null; line = br.readLine()) {
+                int cInt = line.indexOf(",");
+                persons.add(new Person(line.substring(0, cInt), Integer.parseInt(line.substring(cInt + 1, line.length()))));
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return persons;
 
     }
